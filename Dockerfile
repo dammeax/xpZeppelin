@@ -5,6 +5,7 @@ RUN curl -s http://www.eu.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-ma
 RUN ln -s /usr/local/apache-maven-3.3.9/bin/mvn /usr/local/bin/mvn
 RUN export MAVEN_OPTS="-Xmx2g -XX:MaxPermSize=1024m"
 COPY settings.xml /root/.m2/
+RUN mvn clean package -DskipTests -Pspark-2.2 -Phadoop-2.7 -Pyarn -Ppyspark -Psparkr -Pr -Pscala-2.11
 #RUN ln -s /opt/zeppelin-0.7.3-bin-all /opt/zeppelin
 #WORKDIR /opt/zeppelin-0.7.3-bin-all
 RUN cp conf/shiro.ini.template conf/shiro.ini
