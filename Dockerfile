@@ -5,7 +5,7 @@ RUN curl -s http://www.eu.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-ma
 RUN ln -s /usr/local/apache-maven-3.3.9/bin/mvn /usr/local/bin/mvn
 RUN export MAVEN_OPTS="-Xmx2g -XX:MaxPermSize=1024m"
 RUN mkdir /var/zeppelin
-RUN git clone https://github.com/apache/zeppelin.git  /var/zeppelin/
+RUN git clone -b branch-0.8 https://github.com/apache/zeppelin.git  /var/zeppelin/
 
 RUN /var/zeppelin/dev/change_scala_version.sh 2.11
 RUN cd /var/zeppelin; mvn clean package -DskipTests -Pspark-2.2 -Phadoop-2.7 -Pyarn -Ppyspark -Psparkr -Pr -Pscala-2.11
