@@ -8,7 +8,7 @@ RUN mkdir /var/zeppelin
 RUN git clone -b branch-0.8 https://github.com/apache/zeppelin.git  /var/zeppelin/
 
 RUN /var/zeppelin/dev/change_scala_version.sh 2.11
-RUN cd /var/zeppelin; mvn clean package -DskipTests -Pspark-2.2 -Phadoop-2.7 -Pyarn -Ppyspark -Psparkr -Pr -Pscala-2.11
+RUN cd /var/zeppelin; mvn -X clean package -DskipTests -Pspark-2.2 -Phadoop-2.7 -Pyarn -Ppyspark -Psparkr -Pr -Pscala-2.11
 #RUN ln -s /opt/zeppelin-0.7.3-bin-all /opt/zeppelin
 #WORKDIR /opt/zeppelin-0.7.3-bin-all
 RUN cp conf/shiro.ini.template conf/shiro.ini
