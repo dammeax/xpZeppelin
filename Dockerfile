@@ -7,13 +7,17 @@ RUN ln -s /usr/local/apache-maven-3.3.9/bin/mvn /usr/local/bin/mvn
 RUN export MAVEN_OPTS="-Xmx2g -XX:MaxPermSize=1024m"
 
 # install dependencies for nodejs
-RUN npm install -g yo bower grunt-cli 
-RUN npm install -g generator-angular
+#RUN npm install -g yo bower grunt-cli 
+#RUN npm install -g generator-angular
 
 RUN mkdir /var/zeppelin
 RUN git clone -b branch-0.8 https://github.com/apache/zeppelin.git  /var/zeppelin/
 
 RUN /var/zeppelin/dev/change_scala_version.sh 2.11
+
+# Fix "Cannot find where you keep your Bower packages. Use --force to continue"
+RUN mkdir /var/zeppelin/zeppelin-web/bower_components
+
 # Tentative to solve issue npm ERR! code ELIFECYCLE
 #RUN rm /var/zeppelin/zeppelin-web/*.js
 #RUN rm /var/zeppelin/zeppelin-web/*.json
