@@ -1,5 +1,6 @@
 FROM dammeax/xpspark
 RUN yum -y install gcc python-devel git java-1.8.0-openjdk-devel npm fontconfig which bzip2 make; yum clean all
+RUN yum -y groupinstall 'Development Tools'
 RUN pip install --upgrade matplotlib seaborn
 RUN curl -s http://www.eu.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz | tar xz -C /usr/local/
 RUN ln -s /usr/local/apache-maven-3.3.9/bin/mvn /usr/local/bin/mvn
