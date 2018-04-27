@@ -10,7 +10,7 @@ RUN git clone -b branch-0.8 https://github.com/apache/zeppelin.git  /var/zeppeli
 RUN /var/zeppelin/dev/change_scala_version.sh 2.11
 # Tentative to solve issue npm ERR! code ELIFECYCLE
 RUN rm /var/zeppelin/zeppelin-web/*.js
-RUN rm /var/zeppelin/zeppelin-web/*.json
+#RUN rm /var/zeppelin/zeppelin-web/*.json
 RUN rm -rf /var/zeppelin/zeppelin-web/e2e
 RUN cd /var/zeppelin; mvn -X clean package -DskipTests -Pspark-2.2 -Phadoop-2.7 -Pyarn -Ppyspark -Psparkr -Pr -Pscala-2.11
 #RUN ln -s /opt/zeppelin-0.7.3-bin-all /opt/zeppelin
