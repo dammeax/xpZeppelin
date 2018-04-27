@@ -7,10 +7,7 @@ RUN ln -s /usr/local/apache-maven-3.3.9/bin/mvn /usr/local/bin/mvn
 RUN export MAVEN_OPTS="-Xmx2g -XX:MaxPermSize=1024m"
 
 # install nodejs v0.12.7
-RUN curl -s http://nodejs.org/dist/v0.12.7/node-v0.12.7.tar.gz | tar xz -C /usr/local/
-RUN cd /usr/local/node-v0.12.7 ; ./configure
-RUN cd /usr/local/node-v0.12.7 ; make
-RUN cd /usr/local/node-v0.12.7 ; make install
+RUN npm install -g grunt-cli
 
 RUN mkdir /var/zeppelin
 RUN git clone -b branch-0.8 https://github.com/apache/zeppelin.git  /var/zeppelin/
