@@ -8,13 +8,17 @@ RUN mkdir /var/zeppelin
 RUN git clone -b branch-0.8 https://github.com/apache/zeppelin.git  /var/zeppelin/
 
 RUN /var/zeppelin/dev/change_scala_version.sh 2.11
+# Tentative to solve issue npm ERR! code ELIFECYCLE
+RUN rm /var/zeppelin/zeppelin-web/*.js
+RUN rm /var/zeppelin/zeppelin-web/*.json
+RUN rm -rf /var/zeppelin/zeppelin-web/e2e
 RUN cd /var/zeppelin; mvn -X clean package -DskipTests -Pspark-2.2 -Phadoop-2.7 -Pyarn -Ppyspark -Psparkr -Pr -Pscala-2.11
 #RUN ln -s /opt/zeppelin-0.7.3-bin-all /opt/zeppelin
 #WORKDIR /opt/zeppelin-0.7.3-bin-all
-RUN cp conf/shiro.ini.template conf/shiro.ini
-RUN sed -i 's/admin = password1/xp = vlab4xp/' conf/shiro.ini
-RUN sed -i 's/user1 = password2, role1, role2//' conf/shiro.ini
-RUN sed -i 's/user2 = password3, role3//' conf/shiro.ini
-RUN sed -i 's/user3 = password4, role2//' conf/shiro.ini
-RUN cp conf/zeppelin-site.xml.template conf/zeppelin-site.xml
-RUN sed -i '/<name>zeppelin.anonymous.allowed<\/name>/{n;s/<value>.*<\/value>/<value>false<\/value>/;}' conf/zeppelin-site.xml
+#RUN cp conf/shiro.ini.template conf/shiro.ini
+#RUN sed -i 's/admin = password1/xp = vlab4xp/' conf/shiro.ini
+#RUN sed -i 's/user1 = password2, role1, role2//' conf/shiro.ini
+#RUN sed -i 's/user2 = password3, role3//' conf/shiro.ini
+#RUN sed -i 's/user3 = password4, role2//' conf/shiro.ini
+#RUN cp conf/zeppelin-site.xml.template conf/zeppelin-site.xml
+#RUN sed -i '/<name>zeppelin.anonymous.allowed<\/name>/{n;s/<value>.*<\/value>/<value>false<\/value>/;}' conf/zeppelin-site.xml
