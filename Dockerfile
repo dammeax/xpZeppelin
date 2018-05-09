@@ -18,11 +18,8 @@ RUN /var/zeppelin/dev/change_scala_version.sh 2.11
 # Fix "Cannot find where you keep your Bower packages. Use --force to continue"
 RUN cd /var/zeppelin/zeppelin-web;npm install -g bower;bower --allow-root install
 
-# Tentative to solve issue npm ERR! code ELIFECYCLE
-#RUN rm /var/zeppelin/zeppelin-web/*.js
-#RUN rm /var/zeppelin/zeppelin-web/*.json
-#RUN rm -rf /var/zeppelin/zeppelin-web/e2e
-RUN cd /var/zeppelin; mvn -X clean package -DskipTests -Pspark-2.2 -Phadoop-2.7 -Pyarn -Ppyspark -Psparkr -Pr -Pscala-2.11
+#RUN cd /var/zeppelin; mvn -X clean package -DskipTests -Pspark-2.2 -Phadoop-2.7 -Pyarn -Ppyspark -Psparkr -Pr -Pscala-2.11
+
 #RUN ln -s /opt/zeppelin-0.7.3-bin-all /opt/zeppelin
 #WORKDIR /opt/zeppelin-0.7.3-bin-all
 #RUN cp conf/shiro.ini.template conf/shiro.ini
