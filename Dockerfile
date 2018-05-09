@@ -16,7 +16,7 @@ RUN git clone -b branch-0.8 https://github.com/apache/zeppelin.git  /var/zeppeli
 RUN /var/zeppelin/dev/change_scala_version.sh 2.11
 
 # Fix "Cannot find where you keep your Bower packages. Use --force to continue"
-RUN mkdir /var/zeppelin/zeppelin-web/bower_components
+RUN cd /var/zeppelin/zeppelin-web;npm install -g bower;bower --allow-root install
 
 # Tentative to solve issue npm ERR! code ELIFECYCLE
 #RUN rm /var/zeppelin/zeppelin-web/*.js
