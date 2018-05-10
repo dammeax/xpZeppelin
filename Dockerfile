@@ -18,7 +18,7 @@ RUN /var/zeppelin/dev/change_scala_version.sh 2.11
 # Fix "Cannot find where you keep your Bower packages. Use --force to continue"
 RUN cd /var/zeppelin/zeppelin-web;npm install -g bower;bower --allow-root install
 
-#RUN cd /var/zeppelin; mvn -X clean package -DskipTests -Pspark-2.2 -Phadoop-2.7 -Pyarn -Ppyspark -Psparkr -Pr -Pscala-2.11
+RUN cd /var/zeppelin; mvn -X package -DskipTests -Pspark-2.2 -Phadoop-2.7 -Pyarn -Ppyspark -Psparkr -Pr -Pscala-2.11
 
 #RUN ln -s /opt/zeppelin-0.7.3-bin-all /opt/zeppelin
 #WORKDIR /opt/zeppelin-0.7.3-bin-all
