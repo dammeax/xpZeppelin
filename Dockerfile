@@ -3,6 +3,9 @@ RUN yum -y install gcc python-devel git java-1.8.0-openjdk-devel npm fontconfig 
 RUN yum -y groupinstall 'Development Tools'
 RUN yum install -y libcurl-devel openssl-devel libxml2-devel
 RUN yum install -y R
+COPY installEvaluate.r /tmp
+# Fix "ERROR: dependency 'evaluate' is not available for package 'rzeppelin'"
+RUN Rscript /tmp/installEvaluate.r
 RUN pip install --upgrade matplotlib seaborn
 RUN curl -s http://www.eu.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz | tar xz -C /usr/local/
 RUN ln -s /usr/local/apache-maven-3.3.9/bin/mvn /usr/local/bin/mvn
