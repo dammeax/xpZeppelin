@@ -1,4 +1,4 @@
-FROM dammeax/xpspark
+FROM dxxpteam/xpspark:2.3
 RUN yum -y install gcc python-devel git java-1.8.0-openjdk-devel npm fontconfig which bzip2 make; yum clean all
 RUN yum -y groupinstall 'Development Tools'
 RUN yum install -y libcurl-devel openssl-devel libxml2-devel
