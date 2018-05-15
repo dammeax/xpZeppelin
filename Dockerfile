@@ -1,4 +1,7 @@
-FROM dxxpteam/xpspark:2.3
+# First section builds a tempory docker image to compile Zeppelin
+# To avoid all the build dependencies to be part of the final Zeppelin image, a second image (runner) is build
+# and the target of the compilation is copied into that image
+FROM centos:7.3.1611 as builder
 RUN yum -y install gcc python-devel git java-1.8.0-openjdk-devel npm fontconfig which bzip2 make; yum clean all
 RUN yum -y groupinstall 'Development Tools'
 RUN yum install -y libcurl-devel openssl-devel libxml2-devel
@@ -24,6 +27,13 @@ RUN /var/zeppelin/dev/change_scala_version.sh 2.11
 RUN cd /var/zeppelin/zeppelin-web;npm install -g bower;bower --allow-root install
 
 RUN cd /var/zeppelin; mvn -X package -Pbuild-distr -DskipTests -Pspark-2.2 -Phadoop-2.7 -Pyarn -Ppyspark -Psparkr -Pr -Pscala-2.11
+
+# Building the Zeppelin image based on compilation done in builder image
+FROM dxxpteam/xpspark:2.3
+
+COPY --from=builder /var/zeppelin/zeppelin-distribution/target/*.tar.gz /opt/
+RUN gtar xvfz *.tar.gz
+RUN rm *.tar.gz
 
 #RUN ln -s /opt/zeppelin-0.7.3-bin-all /opt/zeppelin
 #WORKDIR /opt/zeppelin-0.7.3-bin-all
