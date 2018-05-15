@@ -6,7 +6,7 @@ RUN yum install -y R
 COPY installEvaluate.r /tmp
 # Fix "ERROR: dependency 'evaluate' is not available for package 'rzeppelin'"
 RUN Rscript /tmp/installEvaluate.r
-RUN pip install --upgrade matplotlib seaborn
+RUN pip install --upgrade matplotlib seaborn jupyter grpcio
 RUN curl -s http://www.eu.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz | tar xz -C /usr/local/
 RUN ln -s /usr/local/apache-maven-3.3.9/bin/mvn /usr/local/bin/mvn
 RUN export MAVEN_OPTS="-Xmx2g -XX:MaxPermSize=1024m"
