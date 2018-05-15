@@ -33,8 +33,8 @@ RUN cd /var/zeppelin; mvn -X package -Pbuild-distr -DskipTests -Pspark-2.2 -Phad
 FROM dxxpteam/xpspark:2.3
 
 COPY --from=builder /var/zeppelin/zeppelin-distribution/target/*.tar.gz /opt/
-RUN gtar xvfz *.tar.gz
-RUN rm *.tar.gz
+RUN gtar xvfz /opt/*.tar.gz
+RUN rm /opt/*.tar.gz
 RUN pip install --upgrade matplotlib seaborn jupyter grpcio
 #RUN ln -s /opt/zeppelin-0.7.3-bin-all /opt/zeppelin
 #WORKDIR /opt/zeppelin-0.7.3-bin-all
