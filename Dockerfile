@@ -9,7 +9,6 @@ RUN yum install -y R
 COPY installEvaluate.r /tmp
 # Fix "ERROR: dependency 'evaluate' is not available for package 'rzeppelin'"
 RUN Rscript /tmp/installEvaluate.r
-RUN pip install --upgrade matplotlib seaborn jupyter grpcio
 RUN curl -s http://www.eu.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz | tar xz -C /usr/local/
 RUN ln -s /usr/local/apache-maven-3.3.9/bin/mvn /usr/local/bin/mvn
 RUN export MAVEN_OPTS="-Xmx2g -XX:MaxPermSize=1024m"
@@ -34,7 +33,7 @@ FROM dxxpteam/xpspark:2.3
 COPY --from=builder /var/zeppelin/zeppelin-distribution/target/*.tar.gz /opt/
 RUN gtar xvfz *.tar.gz
 RUN rm *.tar.gz
-
+RUN pip install --upgrade matplotlib seaborn jupyter grpcio
 #RUN ln -s /opt/zeppelin-0.7.3-bin-all /opt/zeppelin
 #WORKDIR /opt/zeppelin-0.7.3-bin-all
 #RUN cp conf/shiro.ini.template conf/shiro.ini
