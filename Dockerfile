@@ -2,9 +2,9 @@
 # To avoid all the build dependencies to be part of the final Zeppelin image, a second image (runner) is build
 # and the target of the compilation is copied into that image
 FROM centos:7.3.1611 as builder
-RUN yum -y install gcc python-devel git java-1.8.0-openjdk-devel npm fontconfig which bzip2 make; yum clean all
+RUN yum -y install epel-release gcc python-devel git java-1.8.0-openjdk-devel npm fontconfig which bzip2 make; yum clean all
 RUN yum -y groupinstall 'Development Tools'
-RUN yum install -y libcurl-devel openssl-devel libxml2-devel epel-release
+RUN yum install -y libcurl-devel openssl-devel libxml2-devel
 RUN yum install -y R
 COPY installEvaluate.r /tmp
 # Fix "ERROR: dependency 'evaluate' is not available for package 'rzeppelin'"
