@@ -37,7 +37,7 @@ RUN pip install --upgrade matplotlib seaborn jupyter grpcio
 RUN ln -s /opt/zeppelin-0.8.1-SNAPSHOT /opt/zeppelin
 WORKDIR /opt/zeppelin-0.8.1-SNAPSHOT
 RUN cp conf/shiro.ini.template conf/shiro.ini
-RUN sed -i 's/admin = password1/xp = vlab4xp/' conf/shiro.ini
+RUN sed -i 's/\#admin = password1/xp = vlab4xp/' conf/shiro.ini
 RUN sed -i 's/user1 = password2, role1, role2//' conf/shiro.ini
 RUN sed -i 's/user2 = password3, role3//' conf/shiro.ini
 RUN sed -i 's/user3 = password4, role2//' conf/shiro.ini
