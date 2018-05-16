@@ -15,10 +15,6 @@ RUN curl -s http://www.eu.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-ma
 RUN ln -s /usr/local/apache-maven-3.3.9/bin/mvn /usr/local/bin/mvn
 RUN export MAVEN_OPTS="-Xmx2g -XX:MaxPermSize=1024m"
 
-# install dependencies for nodejs
-#RUN npm install -g yo bower grunt-cli 
-#RUN npm install -g generator-angular
-
 RUN mkdir /var/zeppelin
 RUN git clone -b branch-0.8 https://github.com/apache/zeppelin.git  /var/zeppelin/
 
@@ -33,7 +29,7 @@ RUN cd /var/zeppelin; mvn -X package -Pbuild-distr -DskipTests -Pspark-2.2 -Phad
 FROM dxxpteam/xpspark:2.3
 RUN yum -y install gcc
 COPY --from=builder /var/zeppelin/zeppelin-distribution/target/*.tar.gz /opt/
-RUN gtar xvfz /opt/*.tar.gz
+RUN gtar xvfz /opt/*.tar.gz --directory=/opt
 RUN rm /opt/*.tar.gz
 
 RUN yum -y install epel-release python-devel; yum clean all
