@@ -31,17 +31,17 @@ RUN cd /var/zeppelin; mvn -X package -Pbuild-distr -DskipTests -Pspark-2.2 -Phad
 
 # Building the Zeppelin image based on compilation done in builder image
 FROM dxxpteam/xpspark:2.3
-
+RUN yum -y install gcc
 COPY --from=builder /var/zeppelin/zeppelin-distribution/target/*.tar.gz /opt/
 RUN gtar xvfz /opt/*.tar.gz
 RUN rm /opt/*.tar.gz
 RUN pip install --upgrade matplotlib seaborn jupyter grpcio
-#RUN ln -s /opt/zeppelin-0.7.3-bin-all /opt/zeppelin
-#WORKDIR /opt/zeppelin-0.7.3-bin-all
-#RUN cp conf/shiro.ini.template conf/shiro.ini
-#RUN sed -i 's/admin = password1/xp = vlab4xp/' conf/shiro.ini
-#RUN sed -i 's/user1 = password2, role1, role2//' conf/shiro.ini
-#RUN sed -i 's/user2 = password3, role3//' conf/shiro.ini
-#RUN sed -i 's/user3 = password4, role2//' conf/shiro.ini
-#RUN cp conf/zeppelin-site.xml.template conf/zeppelin-site.xml
-#RUN sed -i '/<name>zeppelin.anonymous.allowed<\/name>/{n;s/<value>.*<\/value>/<value>false<\/value>/;}' conf/zeppelin-site.xml
+RUN ln -s /opt/zeppelin-0.8.1-SNAPSHOT /opt/zeppelin
+WORKDIR /opt/zeppelin-0.8.1-SNAPSHOT
+RUN cp conf/shiro.ini.template conf/shiro.ini
+RUN sed -i 's/admin = password1/xp = vlab4xp/' conf/shiro.ini
+RUN sed -i 's/user1 = password2, role1, role2//' conf/shiro.ini
+RUN sed -i 's/user2 = password3, role3//' conf/shiro.ini
+RUN sed -i 's/user3 = password4, role2//' conf/shiro.ini
+RUN cp conf/zeppelin-site.xml.template conf/zeppelin-site.xml
+RUN sed -i '/<name>zeppelin.anonymous.allowed<\/name>/{n;s/<value>.*<\/value>/<value>false<\/value>/;}' conf/zeppelin-site.xml
