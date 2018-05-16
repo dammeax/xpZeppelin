@@ -36,8 +36,7 @@ COPY --from=builder /var/zeppelin/zeppelin-distribution/target/*.tar.gz /opt/
 RUN gtar xvfz /opt/*.tar.gz
 RUN rm /opt/*.tar.gz
 
-RUN yum -y install epel-release; yum clean all
-RUN yum -y install python-pip; yum clean all && pip install --upgrade pip numpy scipy pandas scikit-learn tensorflow
+RUN yum -y install epel-release python-devel; yum clean all
 RUN pip install --upgrade matplotlib seaborn jupyter grpcio
 RUN ln -s /opt/zeppelin-0.8.1-SNAPSHOT /opt/zeppelin
 WORKDIR /opt/zeppelin-0.8.1-SNAPSHOT
